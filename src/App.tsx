@@ -2,6 +2,8 @@ import { createMemo, createSignal, For, onCleanup, onMount, Show } from 'solid-j
 import { Toaster, toast } from 'solid-toast'
 import {
   FiBell,
+  FiChevronDown,
+  FiChevronUp,
   FiCheckSquare,
   FiClock,
   FiDownload,
@@ -27,7 +29,12 @@ import {
   type NoteColor,
 } from './lib/db'
 import { exportEncryptedBackup, exportPlainBackup, importBackup } from './lib/backup'
-import { sendReminderNotification, startReminderLoop, stopReminderLoop } from './lib/reminders'
+import {
+  playReminderSound,
+  sendReminderNotification,
+  startReminderLoop,
+  stopReminderLoop,
+} from './lib/reminders'
 
 type InstallPrompt = {
   prompt: () => Promise<void>
@@ -135,6 +142,8 @@ function App() {
   )
 
   let importInputRef: HTMLInputElement | undefined
+  let editorRef: HTMLElement | undefined
+  let titleInputRef: HTMLInputElement | undefined
 
   const isEditing = createMemo(() => editingId() !== null)
 
@@ -187,6 +196,7 @@ function App() {
   const checkDueReminders = async () => {
     const due = await getDueReminderNotes(new Date().toISOString())
     if (!due.length) return
+    await playReminderSound()
 
     for (const note of due) {
       await sendReminderNotification(note)
@@ -347,8 +357,23 @@ function App() {
     setNotes((prev) => sortNotesLocal(prev.map((item) => (item.id === updated.id ? updated : item))))
   }
 
-  const handleDrop = async (targetId: string) => {
-    const activeDragId = draggedId()
+  const moveNoteByStep = async (noteId: string, step: -1 | 1) => {
+    const ordered = [...notes()]
+    const fromIndex = ordered.findIndex((item) => item.id === noteId)
+    if (fromIndex < 0) return
+    const toIndex = fromIndex + step
+    if (toIndex < 0 || toIndex >= ordered.length) return
+    if (ordered[fromIndex].isPinned !== ordered[toIndex].isPinned) {
+      toast('Перемещение между pinned и обычными отключено')
+      return
+    }
+    const [moved] = ordered.splice(fromIndex, 1)
+    ordered.splice(toIndex, 0, moved)
+    await applySequentialOrderAndSave(ordered)
+  }
+
+  const handleDrop = async (sourceId: string, targetId: string) => {
+    const activeDragId = sourceId || draggedId()
     if (!activeDragId || activeDragId === targetId) return
 
     const ordered = [...notes()]
@@ -384,6 +409,12 @@ function App() {
       toast.success('PWA установлено')
       setInstallPrompt(null)
     }
+  }
+
+  const openCreateForm = () => {
+    resetDraft()
+    editorRef?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    window.setTimeout(() => titleInputRef?.focus(), 250)
   }
 
   const downloadTextFile = (filename: string, content: string, type = 'application/json') => {
@@ -472,7 +503,7 @@ function App() {
         <header class="mb-6 rounded-3xl border border-white/70 bg-white/75 p-5 shadow-xl shadow-slate-200/60 backdrop-blur md:p-8">
           <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
-              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">KeepX</p>
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">KeepXima</p>
               <h1 class="text-3xl font-black tracking-tight sm:text-4xl">Notes + Reminders</h1>
               <p class="mt-1 text-sm text-slate-600">Keep-подобный UI, offline-first, drag-and-drop, backup и checklist.</p>
             </div>
@@ -534,7 +565,10 @@ function App() {
         </header>
 
         <div class="grid gap-6 lg:grid-cols-[360px_1fr]">
-          <aside class="rounded-3xl border border-white/80 bg-white/80 p-5 shadow-lg backdrop-blur">
+          <aside
+            ref={editorRef}
+            class="order-2 rounded-3xl border border-white/80 bg-white/80 p-5 pb-24 shadow-lg backdrop-blur lg:order-1 lg:pb-5"
+          >
             <div class="mb-4 flex items-center justify-between">
               <h2 class="text-lg font-bold">{isEditing() ? 'Редактирование' : 'Новая заметка'}</h2>
               <Show when={isEditing()}>
@@ -546,6 +580,7 @@ function App() {
 
             <div class="space-y-3">
               <input
+                ref={titleInputRef}
                 value={draft().title}
                 onInput={(event) => setDraft((prev) => ({ ...prev, title: event.currentTarget.value }))}
                 class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none ring-cyan-400 focus:ring"
@@ -686,7 +721,7 @@ function App() {
             </div>
           </aside>
 
-          <section>
+          <section class="order-1 lg:order-2">
             <Show when={filteredNotes().length > 0} fallback={<EmptyState />}>
               <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
                 <For each={filteredNotes()}>
@@ -697,14 +732,28 @@ function App() {
                     return (
                       <article
                         draggable
-                        onDragStart={() => setDraggedId(note.id)}
-                        onDragOver={(event) => event.preventDefault()}
+                        onDragStart={(event) => {
+                          setDraggedId(note.id)
+                          event.dataTransfer?.setData('text/plain', note.id)
+                          if (event.dataTransfer) {
+                            event.dataTransfer.effectAllowed = 'move'
+                            event.dataTransfer.dropEffect = 'move'
+                          }
+                        }}
+                        onDragOver={(event) => {
+                          event.preventDefault()
+                          if (event.dataTransfer) event.dataTransfer.dropEffect = 'move'
+                        }}
                         onDragEnter={() => setDragOverId(note.id)}
                         onDragEnd={() => {
                           setDraggedId(null)
                           setDragOverId(null)
                         }}
-                        onDrop={() => void handleDrop(note.id)}
+                        onDrop={(event) => {
+                          event.preventDefault()
+                          const sourceId = event.dataTransfer?.getData('text/plain') ?? draggedId() ?? ''
+                          void handleDrop(sourceId, note.id)
+                        }}
                         class={`rounded-2xl border bg-gradient-to-br p-4 shadow-md transition hover:-translate-y-1 ${color.classes} ${dragOverId() === note.id ? 'ring-2 ring-slate-900' : ''}`}
                       >
                         <div class="mb-2 flex items-start justify-between gap-2">
@@ -769,6 +818,20 @@ function App() {
                           <div class="flex gap-2">
                             <button
                               class="rounded-lg bg-white/80 p-2 text-slate-700 hover:bg-white"
+                              onClick={() => void moveNoteByStep(note.id, -1)}
+                              title="Move up"
+                            >
+                              <FiChevronUp />
+                            </button>
+                            <button
+                              class="rounded-lg bg-white/80 p-2 text-slate-700 hover:bg-white"
+                              onClick={() => void moveNoteByStep(note.id, 1)}
+                              title="Move down"
+                            >
+                              <FiChevronDown />
+                            </button>
+                            <button
+                              class="rounded-lg bg-white/80 p-2 text-slate-700 hover:bg-white"
                               onClick={() => editNote(note)}
                             >
                               <FiEdit3 />
@@ -790,6 +853,14 @@ function App() {
           </section>
         </div>
       </section>
+
+      <button
+        class="fixed bottom-5 right-5 z-30 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-900 text-white shadow-xl transition hover:-translate-y-0.5 hover:bg-slate-800 lg:hidden"
+        onClick={openCreateForm}
+        aria-label="Создать новую заметку"
+      >
+        <FiPlus class="text-xl" />
+      </button>
 
       <Toaster
         position="top-right"

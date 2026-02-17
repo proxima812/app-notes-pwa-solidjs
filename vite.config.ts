@@ -11,9 +11,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
       manifest: {
-        name: 'KeepX Notes',
-        short_name: 'KeepX',
-        description: 'Modern offline notes with reminders',
+        name: 'KeepXima',
+        short_name: 'KeepXima',
+        description: 'KeepXima notes with reminders and offline mode',
         theme_color: '#0d1117',
         background_color: '#f4f6f8',
         display: 'standalone',

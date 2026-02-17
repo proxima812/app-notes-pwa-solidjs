@@ -1,5 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
-  <rect width="512" height="512" rx="132" fill="#0f172a" />
-  <rect x="128" y="90" width="256" height="332" rx="24" fill="#f8fafc" />
-  <path d="M176 180h160M176 236h160M176 292h110" stroke="#0f172a" stroke-width="28" stroke-linecap="round" />
+  <defs>
+    <radialGradient id="meshA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(128 114) rotate(35) scale(280)">
+      <stop stop-color="#86efac"/>
+      <stop offset="1" stop-color="#86efac" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="meshB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(402 396) rotate(-35) scale(320)">
+      <stop stop-color="#5eead4"/>
+      <stop offset="1" stop-color="#5eead4" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="base" x1="36" y1="30" x2="478" y2="480" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#16a34a"/>
+      <stop offset="0.5" stop-color="#22c55e"/>
+      <stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="132" fill="url(#base)"/>
+  <rect width="512" height="512" rx="132" fill="url(#meshA)"/>
+  <rect width="512" height="512" rx="132" fill="url(#meshB)"/>
+  <path d="M256 108c-56.3 0-102 45.7-102 102v73.4L126 346c-6.6 13.7 3.2 29.8 18.4 29.8h223.2c15.2 0 25-16.1 18.4-29.8L358 283.4V210c0-56.3-45.7-102-102-102Z" fill="#ecfeff"/>
+  <circle cx="256" cy="408" r="33" fill="#134e4a"/>
+  <path d="M256 150v48" stroke="#14532d" stroke-width="22" stroke-linecap="round"/>
 </svg>
