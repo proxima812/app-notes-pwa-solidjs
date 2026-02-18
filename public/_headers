@@ -1,5 +1,11 @@
+/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex
+
 /sw.js
   Cache-Control: no-cache
 
 /manifest.webmanifest
   Cache-Control: public, max-age=0, must-revalidate
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
