@@ -13,6 +13,15 @@
 
 ---
 
+## 📚 Contents
+
+- [🇬🇧 English](#-english)
+- [🇩🇪 Deutsch](#-deutsch)
+- [🇪🇸 Español](#-español)
+- [🇷🇺 Русский](#-русский)
+
+> Status: `v1.5` stable
+
 ## 🇬🇧 English
 
 ### Project Overview
@@ -104,10 +113,16 @@ Dashboard settings:
 - Output directory: `dist`
 - Node version: `22.12.0`
 
-### Mini Roadmap
+## 🗺 Roadmap
 
-- Fix icon rendering consistency
-- Add more note colors
+- [x] SolidJS frontend
+- [x] Bun runtime support
+- [x] IndexedDB offline storage
+- [x] PWA install support
+- [ ] Icon rendering consistency
+- [ ] More note colors
+- [ ] Authentication system
+- [ ] Public API
 
 ---
 
@@ -202,10 +217,16 @@ Dashboard:
 - Output directory: `dist`
 - Node version: `22.12.0`
 
-### Mini-Roadmap
+## 🗺 Roadmap
 
-- Icon-Rendering stabilisieren
-- Mehr Farben für Notizen
+- [x] SolidJS-Frontend
+- [x] Bun-Runtime-Unterstützung
+- [x] Offline-Speicherung mit IndexedDB
+- [x] PWA-Installationssupport
+- [ ] Icon-Rendering stabilisieren
+- [ ] Mehr Farben für Notizen
+- [ ] Authentifizierungssystem
+- [ ] Öffentliche API
 
 ---
 
@@ -300,10 +321,16 @@ En Dashboard:
 - Output directory: `dist`
 - Node version: `22.12.0`
 
-### Mini Roadmap
+## 🗺 Roadmap
 
-- Arreglar consistencia de iconos
-- Agregar más colores de notas
+- [x] Frontend con SolidJS
+- [x] Soporte de runtime Bun
+- [x] Almacenamiento offline con IndexedDB
+- [x] Soporte de instalación PWA
+- [ ] Arreglar consistencia de iconos
+- [ ] Agregar más colores de notas
+- [ ] Sistema de autenticación
+- [ ] API pública
 
 ---
 
@@ -398,7 +425,13 @@ bunx wrangler pages deploy dist --project-name keepxima
 - Output directory: `dist`
 - Node version: `22.12.0`
 
-### Мини-роудмап
+## 🗺 Roadmap
 
-- Пофиксить иконки
-- Добавить больше цветов заметок
+- [x] Frontend на SolidJS
+- [x] Поддержка Bun runtime
+- [x] Offline-хранение в IndexedDB
+- [x] Поддержка установки PWA
+- [ ] Пофиксить консистентность иконок
+- [ ] Добавить больше цветов заметок
+- [ ] Система аутентификации
+- [ ] Публичный API
