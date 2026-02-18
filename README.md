@@ -2,12 +2,16 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-1.5-111111?style=for-the-badge)
-![License: MIT](https://img.shields.io/badge/license-MIT-0f172a?style=for-the-badge)
-![Bun](https://img.shields.io/badge/runtime-Bun-fbf0df?style=for-the-badge&logo=bun&logoColor=111111)
-![SolidJS](https://img.shields.io/badge/frontend-SolidJS-2c4f7c?style=for-the-badge&logo=solid&logoColor=ffffff)
+![Version](https://img.shields.io/badge/version-1.5-020617?style=for-the-badge&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-020617?style=for-the-badge&logoColor=white)
+
+![AstroJS](https://img.shields.io/badge/AstroJS-framework-ff5d01?style=for-the-badge&logo=astro&logoColor=white)
+![SolidJS](https://img.shields.io/badge/SolidJS-frontend-2c4f7c?style=for-the-badge&logo=solid&logoColor=white)
+![Bun](https://img.shields.io/badge/Bun-runtime-fbf0df?style=for-the-badge&logo=bun&logoColor=000)
+
 ![PWA](https://img.shields.io/badge/PWA-ready-16a34a?style=for-the-badge)
 ![PRs](https://img.shields.io/badge/PRs-welcome-0ea5e9?style=for-the-badge)
+
 
 </div>
 
@@ -60,6 +64,17 @@ src/
   App.tsx
   index.tsx
 ```
+
+### IndexedDB: How the Database Works
+
+- DB name: `keepx-notes-db`, version: `2`.
+- Store: `notes` with `keyPath: id`.
+- Indexes: `updatedAt`, `isPinned`, `reminderAt`, `order`.
+- Note schema includes: `title`, `content`, `color`, `tags`, `checklist`, `isPinned`, `order`, `reminderAt`, `remindedAt`, `createdAt`, `updatedAt`.
+- On app startup, records are normalized and auto-fixed if old/missing fields are detected.
+- Sorting is deterministic: pinned first, then `order`, then latest `updatedAt`.
+- Reminders are resolved locally by filtering due notes (`reminderAt <= now` and `remindedAt == null`).
+- Data never leaves device by default; backup/export is explicit user action.
 
 ### Feature List
 
@@ -165,6 +180,17 @@ src/
   index.tsx
 ```
 
+### IndexedDB: So funktioniert die Datenbank
+
+- Datenbankname: `keepx-notes-db`, Version: `2`.
+- Store: `notes` mit `keyPath: id`.
+- Indizes: `updatedAt`, `isPinned`, `reminderAt`, `order`.
+- Notiz-Schema enthält: `title`, `content`, `color`, `tags`, `checklist`, `isPinned`, `order`, `reminderAt`, `remindedAt`, `createdAt`, `updatedAt`.
+- Beim Start werden Datensätze normalisiert und bei fehlenden/alten Feldern automatisch korrigiert.
+- Sortierung ist stabil: zuerst angeheftete Notizen, dann `order`, dann `updatedAt` (neueste zuerst).
+- Erinnerungen laufen lokal über Filterung fälliger Notizen (`reminderAt <= now` und `remindedAt == null`).
+- Standardmäßig bleiben Daten auf dem Gerät; Backup/Export erfolgt nur auf Nutzeraktion.
+
 ### Funktionsumfang
 
 - Offline-Speicherung mit `IndexedDB`
@@ -269,6 +295,17 @@ src/
   index.tsx
 ```
 
+### IndexedDB: Cómo funciona la base de datos
+
+- Nombre de DB: `keepx-notes-db`, versión: `2`.
+- Store: `notes` con `keyPath: id`.
+- Índices: `updatedAt`, `isPinned`, `reminderAt`, `order`.
+- El esquema de nota incluye: `title`, `content`, `color`, `tags`, `checklist`, `isPinned`, `order`, `reminderAt`, `remindedAt`, `createdAt`, `updatedAt`.
+- Al iniciar la app, los registros se normalizan y se corrigen automáticamente si faltan campos o hay formato antiguo.
+- El orden es determinista: primero fijadas, luego `order`, luego `updatedAt` más reciente.
+- Los recordatorios se resuelven localmente filtrando notas vencidas (`reminderAt <= now` y `remindedAt == null`).
+- Por defecto, los datos no salen del dispositivo; backup/export solo por acción explícita del usuario.
+
 ### Lista de Funcionalidades
 
 - Almacenamiento offline con `IndexedDB`
@@ -372,6 +409,17 @@ src/
   App.tsx
   index.tsx
 ```
+
+### IndexedDB: как работает база в проекте
+
+- Имя БД: `keepx-notes-db`, версия: `2`.
+- Хранилище: `notes` с `keyPath: id`.
+- Индексы: `updatedAt`, `isPinned`, `reminderAt`, `order`.
+- Схема заметки включает: `title`, `content`, `color`, `tags`, `checklist`, `isPinned`, `order`, `reminderAt`, `remindedAt`, `createdAt`, `updatedAt`.
+- При запуске записи нормализуются и автоматически исправляются, если поля устарели или отсутствуют.
+- Сортировка детерминированная: сначала pinned, затем `order`, затем более новый `updatedAt`.
+- Напоминания обрабатываются локально фильтром просроченных заметок (`reminderAt <= now` и `remindedAt == null`).
+- По умолчанию данные не уходят с устройства; backup/export выполняется только явным действием пользователя.
 
 ### Список фич
 
