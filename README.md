@@ -2,12 +2,16 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-1.5-111111?style=for-the-badge)
-![License: MIT](https://img.shields.io/badge/license-MIT-0f172a?style=for-the-badge)
-![Bun](https://img.shields.io/badge/runtime-Bun-fbf0df?style=for-the-badge&logo=bun&logoColor=111111)
-![SolidJS](https://img.shields.io/badge/frontend-SolidJS-2c4f7c?style=for-the-badge&logo=solid&logoColor=ffffff)
+![Version](https://img.shields.io/badge/version-1.5-020617?style=for-the-badge&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-020617?style=for-the-badge&logoColor=white)
+
+![AstroJS](https://img.shields.io/badge/AstroJS-framework-ff5d01?style=for-the-badge&logo=astro&logoColor=white)
+![SolidJS](https://img.shields.io/badge/SolidJS-frontend-2c4f7c?style=for-the-badge&logo=solid&logoColor=white)
+![Bun](https://img.shields.io/badge/Bun-runtime-fbf0df?style=for-the-badge&logo=bun&logoColor=000)
+
 ![PWA](https://img.shields.io/badge/PWA-ready-16a34a?style=for-the-badge)
 ![PRs](https://img.shields.io/badge/PRs-welcome-0ea5e9?style=for-the-badge)
+
 
 </div>
 
