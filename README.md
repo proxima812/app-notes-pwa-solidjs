@@ -1,89 +1,155 @@
 # KeepXima
 
-`KeepXima` — open-source заметочник с акцентом на скорость, офлайн-режим и мобильный UX.
+<div align="center">
 
-## Highlights
+![License: MIT](https://img.shields.io/badge/License-MIT-111111?style=for-the-badge)
+![Bun](https://img.shields.io/badge/Bun-1.3+-fbf0df?style=for-the-badge&logo=bun&logoColor=111111)
+![SolidJS](https://img.shields.io/badge/SolidJS-1.9+-2c4f7c?style=for-the-badge&logo=solid&logoColor=ffffff)
+![PWA](https://img.shields.io/badge/PWA-ready-0f172a?style=for-the-badge)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-16a34a?style=for-the-badge)
 
-- `Offline-first`: хранение в `IndexedDB`
-- `PWA`: установка на телефон
-- `Masonry`-просмотр заметок + мобильный режим `1/2` колонок
-- Напоминания с пресетами времени
-- Звуки по цветам заметок
-- `Checklist`, теги, поиск
-- Экспорт/импорт (включая шифрованный backup)
-- Темы: `Auto / Light / Dark`
+</div>
 
-## Tech Stack
+---
 
-- `SolidJS` + `TypeScript`
-- `Tailwind CSS`
-- `Vite` + `vite-plugin-pwa`
-- `idb`
-- `Bun`
+## 🇬🇧 English
 
-## Local Development
+**KeepXima** is an open-source, offline-first notes app focused on speed, clean UX, and mobile usability.
+
+### Features
+
+- Offline storage with `IndexedDB`
+- PWA install support
+- Masonry notes view with mobile `1/2` column switch
+- Color-based reminder sounds
+- Checklists, tags, search
+- Reminder presets and local notifications
+- JSON + encrypted backup import/export
+- Theme modes: `Auto / Light / Dark`
+
+### Quick Start
 
 ```bash
 bun install
 bun run dev
 ```
 
-## Build
+### Build
 
 ```bash
 bun run build
 ```
 
-## Project Structure
+### Contributing
 
-```text
-src/
-  components/   # UI-блоки
-  lib/          # доменная логика и утилиты
+- See `CONTRIBUTING.md`
+- Open issues via `.github/ISSUE_TEMPLATE`
+- Submit PRs using `.github/pull_request_template.md`
+
+---
+
+## 🇩🇪 Deutsch
+
+**KeepXima** ist eine Open-Source-Notiz-App mit Offline-First-Ansatz, hoher Geschwindigkeit und gutem Mobile-UX.
+
+### Funktionen
+
+- Offline-Speicherung mit `IndexedDB`
+- PWA-Installation
+- Masonry-Ansicht mit mobilem Umschalter `1/2` Spalten
+- Farbabhängige Erinnerungs-Sounds
+- Checklisten, Tags, Suche
+- Zeit-Presets für Erinnerungen und lokale Benachrichtigungen
+- JSON- und verschlüsselter Backup-Import/Export
+- Themes: `Auto / Light / Dark`
+
+### Schnellstart
+
+```bash
+bun install
+bun run dev
 ```
 
-Для модулей есть локальные русскоязычные описания:
-- `src/lib/README.md`
-- `src/components/README.md`
+### Build
 
-## Open Source
+```bash
+bun run build
+```
 
-Проект открыт для форков и pull request:
+### Mitwirken
 
-1. Fork репозитория
-2. Создать ветку под изменение
-3. Проверить сборку `bun run build`
-4. Открыть PR
+- Siehe `CONTRIBUTING.md`
+- Issues über `.github/ISSUE_TEMPLATE`
+- PRs über `.github/pull_request_template.md`
 
-Подробные правила:
-- `CONTRIBUTING.md`
-- `CODE_OF_CONDUCT.md`
-- `SECURITY.md`
-- `.github/pull_request_template.md`
-- `.github/ISSUE_TEMPLATE/*`
+---
 
-Лицензия: `MIT` (`LICENSE`)
+## 🇪🇸 Español
 
-## Roadmap
+**KeepXima** es una app de notas open-source con enfoque offline-first, rápida y optimizada para móvil.
 
-### v1.1
-- [ ] Улучшенный touch drag-and-drop
-- [ ] Визуальный редактор сопоставления «цвет -> звук»
-- [ ] Умные фильтры и сохраненные представления
+### Funcionalidades
 
-### v1.2
-- [ ] Web Push backend (Cloudflare Worker + VAPID)
-- [ ] Синхронизация между устройствами (опционально)
-- [ ] Повторяющиеся напоминания
+- Almacenamiento offline con `IndexedDB`
+- Instalación como PWA
+- Vista masonry con selector móvil `1/2` columnas
+- Sonidos de recordatorio según color
+- Checklists, etiquetas y búsqueda
+- Presets de hora para recordatorios y notificaciones locales
+- Importación/exportación de backups JSON y cifrados
+- Temas: `Auto / Light / Dark`
 
-### v1.3
-- [ ] Коллаборативные заметки
-- [ ] Публичный plugin API
-- [ ] Расширенный аналитический режим продуктивности
+### Inicio rápido
 
-## How to help project grow
+```bash
+bun install
+bun run dev
+```
 
-- Открывать маленькие, качественные PR
-- Добавлять reproducible bug reports
-- Улучшать документацию и onboarding
-- Делиться проектом и ставить звезду
+### Build
+
+```bash
+bun run build
+```
+
+### Contribuir
+
+- Ver `CONTRIBUTING.md`
+- Abrir issues con `.github/ISSUE_TEMPLATE`
+- Enviar PR con `.github/pull_request_template.md`
+
+---
+
+## 🇷🇺 Русский
+
+**KeepXima** — open-source заметочник с офлайн-first подходом, быстрым интерфейсом и хорошей мобильной адаптацией.
+
+### Возможности
+
+- Локальное хранение в `IndexedDB`
+- Установка как PWA
+- Masonry-сетка заметок + мобильный переключатель `1/2` колонок
+- Звуки напоминаний по цвету заметки
+- Checklist, теги и поиск
+- Пресеты времени напоминаний и локальные уведомления
+- Импорт/экспорт JSON и шифрованных backup
+- Темы: `Auto / Light / Dark`
+
+### Быстрый старт
+
+```bash
+bun install
+bun run dev
+```
+
+### Сборка
+
+```bash
+bun run build
+```
+
+### Как контрибьютить
+
+- См. `CONTRIBUTING.md`
+- Создавай issue через `.github/ISSUE_TEMPLATE`
+- Открывай PR через `.github/pull_request_template.md`
